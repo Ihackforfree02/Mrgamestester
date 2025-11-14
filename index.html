@@ -2,180 +2,163 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MR Games — Ultimate Portal</title>
-
-  <!-- TailwindCSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Icons -->
-  <script src="https://unpkg.com/feather-icons"></script>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MR GAMES | Clean Redesign</title>
+  <script src="cloak_panic.js"></script>
   <style>
+    * { box-sizing: border-box; margin:0; padding:0; }
     body {
-      background: linear-gradient(135deg, #121212, #0b1b2a);
-      font-family: "Inter", sans-serif;
+      font-family: 'Segoe UI', sans-serif;
+      background: #0c1116;
+      color: white;
+      overflow-x:hidden;
     }
 
-    /* Loading Screen */
-    #loadingScreen {
-      position: fixed;
-      inset: 0;
-      background: #0a0f14;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 99999;
-      flex-direction: column;
-      animation: fadeOut 1s ease 2.2s forwards;
+    /* HEADER */
+    header {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:15px 25px;
+      background:rgba(0,0,0,0.45);
+      backdrop-filter:blur(6px);
+      position:sticky;
+      top:0;
+      z-index:2000;
+      box-shadow:0 0 15px rgba(0,255,255,0.25);
+    }
+    .logo {
+      font-size:2rem;
+      font-weight:700;
+      letter-spacing:2px;
+      color:#00f2ff;
+      text-shadow:0 0 10px #00f2ff;
+    }
+    .settings-btn {
+      text-decoration:none;
+      background:#00f2ff;
+      padding:10px 18px;
+      color:#0c1116;
+      border-radius:10px;
+      font-weight:600;
+      box-shadow:0 0 10px #00f2ff;
     }
 
-    .loader {
-      width: 55px;
-      height: 55px;
-      border: 5px solid #1e3a8a;
-      border-top-color: #38bdf8;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-      margin-bottom: 18px;
+    /* HAMBURGER */
+    .hamburger { cursor:pointer; width:35px; }
+    .hamburger div {
+      height:5px;
+      background:#00f2ff;
+      margin:6px 0;
+      border-radius:5px;
+      box-shadow:0 0 10px #00f2ff;
+      transition:0.3s;
     }
 
-    @keyframes spin {
-      to { transform: rotate(360deg); }
+    /* SIDE MENU */
+    .side-menu {
+      position:fixed;
+      right:-320px;
+      top:0;
+      width:320px;
+      height:100%;
+      background:#0d161c;
+      padding:40px 25px;
+      transition:0.3s;
+      z-index:3000;
+      border-left:2px solid #00f2ff;
+      box-shadow:-5px 0 20px rgba(0,255,255,0.25);
+    }
+    .side-menu a {
+      display:block;
+      color:#00f2ff;
+      font-size:1.3rem;
+      padding:12px 0;
+      text-decoration:none;
+      border-bottom:1px solid rgba(0,255,255,0.15);
     }
 
-    @keyframes fadeOut {
-      to { opacity: 0; pointer-events: none; }
+    /* GAME GRID */
+    .game-grid {
+      padding:40px;
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(230px,1fr));
+      gap:30px;
     }
+    .game-card {
+      background:#111a20;
+      border-radius:15px;
+      padding:15px;
+      box-shadow:0 0 12px rgba(0,255,255,0.15);
+      transition:0.25s;
+      position:relative;
+      overflow:hidden;
+    }
+    .game-card:hover { transform:scale(1.04); }
+    .game-card img {
+      width:100%; height:150px; object-fit:cover;
+      border-radius:10px;
+      opacity:0.85;
+    }
+    .play-btn {
+      position:absolute;
+      top:50%; left:50%; transform:translate(-50%,-50%);
+      background:#00f2ff;
+      padding:10px 20px;
+      border-radius:12px;
+      color:#000;
+      font-weight:bold;
+      opacity:0;
+      transition:0.3s;
+    }
+    .game-card:hover .play-btn { opacity:1; }
+    .game-card p { margin-top:10px; font-size:1.1rem; }
+    .game-card small { opacity:0.6; font-size:0.85rem; }
 
-    /* Card hover animation */
-    .gameCard {
-      transition: transform 0.25s, box-shadow 0.25s;
-    }
-
-    .gameCard:hover {
-      transform: scale(1.03);
-      box-shadow: 0 0 20px rgba(0, 149, 255, 0.4);
-    }
-
-    /* Offline popup */
-    #offlinePopup {
-      display: none;
-    }
   </style>
 </head>
+<body>
 
-<body class="text-white">
+<header>
+  <div class="logo">MR GAMES</div>
+  <div class="hamburger" onclick="toggleMenu()">
+    <div></div><div></div><div></div>
+  </div>
+  <a href="settings.html" class="settings-btn">⚙ Settings</a>
+</header>
 
-  <!-- LOADING SCREEN -->
-  <div id="loadingScreen">
-    <div class="loader"></div>
-    <p class="text-xl tracking-wide text-blue-300">Loading MR Games… 🎮</p>
+<div id="sideMenu" class="side-menu">
+  <a href="Games.html">🎮 Games</a>
+  <a href="leaderboard.html">🏆 Leaderboard</a>
+  <a href="about_us.html">ℹ️ About Us</a>
+  <a href="record.html">📡 Records</a>
+  <a href="useful_links.html">🔗 Useful Links</a>
+  <a href="https://q6t1u8.ddx.edpuzzle.icu.cdn.cloudflare.net/">🛡 Proxy</a>
+  <a href="https://luminal.cfd.cdn.cloudflare.net/">🌐 Luminal</a>
+</div>
+
+<section class="game-grid">
+  <div class="game-card">
+    <img src="images/placeholder.png" alt="Game Placeholder" />
+    <div class="play-btn">▶ Play</div>
+    <p>Minecraft</p>
+    <small>Developer: Mojang</small>
   </div>
 
-  <!-- OFFLINE POPUP -->
-  <div id="offlinePopup" class="fixed bottom-5 left-1/2 -translate-x-1/2 bg-red-700 p-4 rounded-xl shadow-xl w-80 text-center z-50">
-    <p class="font-semibold">⚠️ Internet disconnected</p>
-    <p class="text-sm">Some games may not load.</p>
+  <div class="game-card">
+    <img src="images/placeholder.png" alt="Game Placeholder" />
+    <div class="play-btn">▶ Play</div>
+    <p>Cluster Rush</p>
+    <small>Developer: Fantastico</small>
   </div>
+</section>
 
-  <!-- HEADER -->
-  <header class="p-6 text-center bg-blue-900/20 backdrop-blur-md border-b border-blue-800/30">
-    <h1 class="text-4xl font-extrabold text-blue-300 drop-shadow-lg">MR GAMES 🎮</h1>
-    <p class="text-blue-400 mt-1">Play anything. Anywhere. Anytime.</p>
-  </header>
-
-  <!-- NAVIGATION -->
-  <nav class="flex justify-center gap-4 mt-6 flex-wrap">
-    <button onclick="cloakGoogle()" class="px-4 py-2 bg-blue-700 rounded-lg hover:bg-blue-800">Cloak: Google</button>
-    <button onclick="cloakDrive()" class="px-4 py-2 bg-blue-700 rounded-lg hover:bg-blue-800">Cloak: Drive</button>
-    <button onclick="cloakGmail()" class="px-4 py-2 bg-blue-700 rounded-lg hover:bg-blue-800">Cloak: Gmail</button>
-    <button onclick="cloakMaths()" class="px-4 py-2 bg-blue-700 rounded-lg hover:bg-blue-800">Cloak: Maths</button>
-  </nav>
-
-  <!-- MAIN CONTENT -->
-  <main class="p-6">
-
-    <!-- SECTION: Games -->
-    <section class="mt-10">
-      <h2 class="text-3xl mb-4 font-bold text-blue-300">🎯 Popular Games</h2>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-
-        <!-- Game Card Template -->
-        <div class="gameCard bg-blue-900/20 p-4 rounded-2xl border border-blue-800/30">
-          <img src="https://picsum.photos/400/250?random=1" class="rounded-xl mb-3">
-          <h3 class="text-xl font-bold">Drift Boss</h3>
-          <p class="text-sm text-blue-300">A drifting skill game where timing is everything.</p>
-          <a href="#" class="mt-3 inline-block px-3 py-2 bg-blue-700 rounded-lg hover:bg-blue-800">Play ➜</a>
-        </div>
-
-        <div class="gameCard bg-blue-900/20 p-4 rounded-2xl border border-blue-800/30">
-          <img src="https://picsum.photos/400/250?random=2" class="rounded-xl mb-3">
-          <h3 class="text-xl font-bold">Run 3</h3>
-          <p class="text-sm text-blue-300">Explore tunnels in space at high speed.</p>
-          <a href="#" class="mt-3 inline-block px-3 py-2 bg-blue-700 rounded-lg hover:bg-blue-800">Play ➜</a>
-        </div>
-
-        <div class="gameCard bg-blue-900/20 p-4 rounded-2xl border border-blue-800/30">
-          <img src="https://picsum.photos/400/250?random=3" class="rounded-xl mb-3">
-          <h3 class="text-xl font-bold">Slope</h3>
-          <p class="text-sm text-blue-300">Roll down a neon slope without falling.</p>
-          <a href="#" class="mt-3 inline-block px-3 py-2 bg-blue-700 rounded-lg hover:bg-blue-800">Play ➜</a>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- SECTION: Tools -->
-    <section class="mt-16">
-      <h2 class="text-3xl mb-4 font-bold text-blue-300">🧰 Tools & Extras</h2>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-
-        <div class="bg-blue-900/20 p-4 rounded-2xl border border-blue-800/30">
-          <h3 class="text-xl font-bold mb-2">Proxy Access 🌐</h3>
-          <p class="text-blue-300 text-sm mb-3">Use this if games are blocked.</p>
-          <a href="#" class="px-4 py-2 bg-blue-700 rounded-lg hover:bg-blue-800">Open Proxy ➜</a>
-        </div>
-
-        <div class="bg-blue-900/20 p-4 rounded-2xl border border-blue-800/30">
-          <h3 class="text-xl font-bold mb-2">Updates 🔧</h3>
-          <p class="text-blue-300 text-sm mb-3">Check what’s new or broken.</p>
-          <a href="#" class="px-4 py-2 bg-blue-700 rounded-lg hover:bg-blue-800">View Updates ➜</a>
-        </div>
-
-      </div>
-    </section>
-
-  </main>
-
-  <!-- FOOTER -->
-  <footer class="text-center mt-20 p-6 text-blue-400">
-    <p>MR Games © 2025 — Stay playing 😎</p>
-  </footer>
-
-  <script>
-    // Offline detection
-    function updateStatus() {
-      const popup = document.getElementById("offlinePopup");
-      if (!navigator.onLine) {
-        popup.style.display = "block";
-      } else {
-        popup.style.display = "none";
-      }
-    }
-    window.addEventListener("online", updateStatus);
-    window.addEventListener("offline", updateStatus);
-
-    // Cloaking
-    function cloakGoogle() { document.title = "Google"; }
-    function cloakDrive() { document.title = "Google Drive"; }
-    function cloakGmail() { document.title = "Gmail"; }
-    function cloakMaths() { document.title = "Maths Revision"; }
-
-    feather.replace();
-  </script>
+<script>
+  function toggleMenu(){
+    let menu=document.getElementById("sideMenu");
+    menu.style.right = menu.style.right === "0px" ? "-320px" : "0px";
+  }
+</script>
 
 </body>
 </html>
