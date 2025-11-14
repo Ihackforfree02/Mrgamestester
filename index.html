@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MR GAMES | MR02 | Unblocked Online Games</title>
+
+  <!-- Canonical SEO Tag -->
+  <link rel="canonical" href="https://ihackforfree02.github.io/Ihackforfree.github.io/" />
+  <link rel="icon" href="favicon.ico" />
+
+  <style>
+    /* --- GLOBAL STYLE --- */
+    * {
+      box-sizing: border-box;
+    }
+
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* --- MAIN CONTAINER --- */
+    .container {
+      text-align: center;
+      padding: 70px 20px;
+      max-width: 700px;
+      margin: auto;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 16px;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
+      animation: fadeIn 1.8s ease-out forwards;
+      opacity: 0;
+      position: relative;
+      z-index: 10;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    h1 {
+      font-size: 3.2rem;
+      margin-bottom: 15px;
+      color: #f0db4f;
+      text-shadow: 0 0 10px #f0db4f, 0 0 20px #f0db4f;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 6px #f0db4f; }
+      to { text-shadow: 0 0 20px #f0db4f, 0 0 35px #f0db4f; }
+    }
+
+    /* --- NAV GRID --- */
+    nav {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 18px;
+      margin-top: 35px;
+    }
+
+    nav a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 18px;
+      font-size: 1.2rem;
+      color: #00ffff;
+      text-decoration: none;
+      border: 2px solid #00ffff;
+      border-radius: 30px;
+      box-shadow: 0 0 8px #00ffff;
+      transition: 0.25s ease;
+    }
+
+    nav a:hover {
+      background: #00ffff;
+      color: #0f2027;
+      transform: translateY(-3px);
+      box-shadow: 0 0 20px #00ffff;
+    }
+
+    nav svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    /* --- RAIN EFFECT --- */
+    .rain-wrapper {
+      pointer-events: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 2;
+      overflow: hidden;
+    }
+
+    .raindrop {
+      position: absolute;
+      top: -10px;
+      width: 2px;
+      background: linear-gradient(180deg, #00ffff, #0088cc);
+      opacity: 0.6;
+      border-radius: 2px;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh);
+        opacity: 0;
+      }
+    }
+
+    /* --- SETTINGS BUTTON --- */
+    .settings-button {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      background-color: #00ffff;
+      color: #0f2027;
+      border: none;
+      border-radius: 50px;
+      padding: 11px 22px;
+      font-size: 1rem;
+      font-weight: bold;
+      box-shadow: 0 0 12px #00ffff;
+      cursor: pointer;
+      z-index: 20;
+      text-decoration: none;
+      transition: 0.25s;
+    }
+
+    .settings-button:hover {
+      box-shadow: 0 0 20px #00ffff;
+    }
+
+    /* --- PARTNER BADGE --- */
+    .partner-badge {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: linear-gradient(135deg, #00ffff, #0078D7);
+      color: #0f2027;
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: bold;
+      box-shadow: 0 0 15px #00ffff;
+      text-decoration: none;
+      transition: 0.25s ease;
+      z-index: 1000;
+    }
+
+    .partner-badge:hover {
+      transform: scale(1.07);
+      color: white;
+      box-shadow: 0 0 25px #00ffff;
+    }
+
+    /* --- CHAT BUTTON --- */
+    #chat-toggle {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background-color: #0078D7;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 20px;
+      box-shadow: 0 0 10px #0078D7;
+      cursor: pointer;
+      user-select: none;
+      z-index: 1000;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <a href="settings.html" class="settings-button">⚙️ Settings</a>
+
+  <div class="rain-wrapper" id="rain-wrapper"></div>
+
+  <div class="container">
+    <h1>MR GAMES</h1>
+
+    <nav>
+      <a href="Games.html">
+        🎮 Play
+      </a>
+      <a href="leaderboard.html">
+        🏆 Leaderboard
+      </a>
+      <a href="about_us.html">
+        📘 About
+      </a>
+      <a href="record.html">
+        📊 Records
+      </a>
+      <a href="use_full_links.html">
+        🔗 Useful Links
+      </a>
+      <a href="https://sigmasigmatoiletedge.github.io/">
+        🌐 Nettle Web
+      </a>
+      <a href="Clash.html">
+        ⚔️ Clash Picker
+      </a>
+      <a href="https://ihackforfree02.github.io/mrgames-/">
+        ⭐ MR GAMES+ BETA
+      </a>
+      <a href="https://ihackforfree02.github.io/games/">
+        🎲 MR GAMES GBA
+      </a>
+      <a href="https://ihackforfree02.github.io/hollownight-sigma/">
+        🗺️ Hollow Knight Map
+      </a>
+      <a href="https://q6t1u8.ddx.edpuzzle.icu.cdn.cloudflare.net/">
+        🔥 Working Proxy
+      </a>
+      <a href="https://luminal.cfd.cdn.cloudflare.net/">
+        🚀 Luminal
+      </a>
+    </nav>
+  </div>
+
+  <div id="chat-toggle" onclick="toggleChat()">💬 Chat</div>
+
+  <a href="https://ezunblocktheopps.github.io/" class="partner-badge" target="_blank">
+    🤝 Partnered with Sigmi
+  </a>
+
+  <script src="cloak_panic.js"></script>
+
+  <script>
+    /* Fix redirect issues */
+    if (!location.pathname.includes('index.html') && location.pathname === '/') {
+      window.location.href = 'index.html';
+    }
+
+    function toggleChat() {
+      if (window.chatWindow && !window.chatWindow.closed) {
+        window.chatWindow.focus();
+      } else {
+        window.chatWindow = window.open(
+          'https://communityhelp.linewize.org/',
+          'ChatWindow',
+          'width=400,height=600'
+        );
+      }
+    }
+
+    /* Rain Effect (Optimized) */
+    const rainWrapper = document.getElementById("rain-wrapper");
+    const drops = 85;
+
+    for (let i = 0; i < drops; i++) {
+      const d = document.createElement("div");
+      d.className = "raindrop";
+
+      const scale = Math.random() * 1.5 + 0.5;
+      d.style.left = Math.random() * 100 + "vw";
+      d.style.height = 10 + scale * 8 + "px";
+      d.style.width = scale + "px";
+      d.style.animationDuration = 2.5 + Math.random() * 3 + "s";
+      d.style.animationDelay = Math.random() * 4 + "s";
+
+      rainWrapper.appendChild(d);
+    }
+  </script>
+
+</body>
+</html>
