@@ -1,478 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>MR GAMES | MR02 | Unblocked Online Games</title>
-  <meta name="description" content="MR GAMES — fast unblocked browser games, leaderboards, and community tools. Play classic and modern browser games with cloud-synced records." />
-  <link rel="canonical" href="https://ihackforfree02.github.io/Ihackforfree.github.io/" />
-  <link rel="icon" href="favicon.ico" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MR Games — Ultimate Portal</title>
+
+  <!-- TailwindCSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Icons -->
+  <script src="https://unpkg.com/feather-icons"></script>
+
   <style>
-    /* ---------- RESET & UTILITIES ---------- */
-    :root{
-      --bg-1:#0f2027; --bg-2:#203a43; --bg-3:#2c5364;
-      --accent: #00ffff; --accent-2:#0078D7; --gold:#f0db4f;
-      --card-bg: rgba(255,255,255,0.04);
-      --glass: rgba(255,255,255,0.04);
-      --text:#e9f6ff;
-    }
-    [data-theme="light"]{
-      --bg-1:#f5f7fb; --bg-2:#eef4fb; --bg-3:#dfeefb;
-      --accent:#0078D7; --accent-2:#0056a3; --gold:#b8860b;
-      --card-bg: rgba(0,0,0,0.04);
-      --glass: rgba(0,0,0,0.03);
-      --text:#0b1220;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:Inter, "Segoe UI", Roboto, system-ui, -apple-system, "Helvetica Neue", Arial;}
-    body{
-      background: linear-gradient(90deg,var(--bg-1),var(--bg-2),var(--bg-3));
-      color:var(--text);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      overflow-x:hidden;
+    body {
+      background: linear-gradient(135deg, #121212, #0b1b2a);
+      font-family: "Inter", sans-serif;
     }
 
-    /* ---------- PRELOADER ---------- */
-    #preloader{
-      position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
-      background:linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.2));
-      z-index:9999;backdrop-filter: blur(4px);
+    /* Loading Screen */
+    #loadingScreen {
+      position: fixed;
+      inset: 0;
+      background: #0a0f14;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 99999;
+      flex-direction: column;
+      animation: fadeOut 1s ease 2.2s forwards;
     }
+
     .loader {
-      width:120px;height:120px;border-radius:16px;background:linear-gradient(135deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01));
-      display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px;box-shadow:0 8px 30px rgba(0,0,0,0.6);
-      border:1px solid rgba(255,255,255,0.03);
+      width: 55px;
+      height: 55px;
+      border: 5px solid #1e3a8a;
+      border-top-color: #38bdf8;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-bottom: 18px;
     }
-    .spinner {
-      width:56px;height:56px;border-radius:50%;border:5px solid rgba(255,255,255,0.08);
-      border-top-color:var(--accent);
-      animation:spin 1s linear infinite;margin-bottom:10px;
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
     }
-    @keyframes spin{to{transform:rotate(360deg)}}
-    .loader p{margin:0;font-size:13px;color:var(--text);opacity:0.95}
 
-    /* ---------- HEADER / NAV ---------- */
-    header{position:relative;z-index:40;padding:18px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-    .brand{display:flex;gap:12px;align-items:center}
-    .logo {
-      width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));
-      display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--bg-1);box-shadow: 0 6px 20px rgba(0,0,0,0.35);
-      flex-shrink:0;
+    @keyframes fadeOut {
+      to { opacity: 0; pointer-events: none; }
     }
-    .brand h1{font-size:1.05rem;margin:0;line-height:1}
-    .brand p{margin:0;font-size:0.78rem;opacity:0.9;color:var(--text)}
-    nav.top-links{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-    nav.top-links a{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;text-decoration:none;color:var(--accent);border:1px solid rgba(255,255,255,0.03);background:var(--glass);font-weight:600}
-    nav.top-links a:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,0.25);}
 
-    /* ---------- HERO ---------- */
-    .hero{
-      max-width:1100px;margin:18px auto;padding:28px;border-radius:14px;background:linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.15));backdrop-filter: blur(6px);
-      display:grid;grid-template-columns: 1fr 420px;gap:22px;align-items:center;
+    /* Card hover animation */
+    .gameCard {
+      transition: transform 0.25s, box-shadow 0.25s;
     }
-    .hero-left h2{font-size:2.2rem;margin:0 0 10px;color:var(--gold);text-shadow:0 0 8px rgba(0,0,0,0.2);}
-    .hero-left p{margin:0 0 18px;color:var(--text);opacity:0.95}
-    .cta-row{display:flex;gap:12px;flex-wrap:wrap}
-    .btn{
-      padding:12px 18px;border-radius:12px;text-decoration:none;font-weight:700;border:none;cursor:pointer;
-      display:inline-flex;gap:10px;align-items:center;justify-content:center;
+
+    .gameCard:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 20px rgba(0, 149, 255, 0.4);
     }
-    .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:var(--bg-1);box-shadow:0 8px 24px rgba(0,0,0,0.35)}
-    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--text)}
-    .hero-right{display:flex;flex-direction:column;gap:12px;align-items:center}
 
-    /* ---------- NAV GRID (main) ---------- */
-    .nav-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-top:8px}
-    .nav-card{display:flex;gap:12px;align-items:center;padding:12px;border-radius:12px;background:var(--card-bg);border:1px solid rgba(255,255,255,0.03);text-decoration:none;color:var(--text);font-weight:700}
-    .nav-card svg{width:28px;height:28px;flex-shrink:0}
-    .nav-card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(0,0,0,0.45)}
-
-    /* ---------- GALLERY / CARDS ---------- */
-    .section{max-width:1100px;margin:26px auto;padding:12px}
-    .section h3{margin:6px 0 12px;font-size:1.2rem}
-    .cards {display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
-    .game {
-      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06));border-radius:12px;padding:12px;border:1px solid rgba(255,255,255,0.03);
-      display:flex;flex-direction:column;gap:8px;min-height:220px;
-    }
-    .game .thumb{height:120px;border-radius:10px;overflow:hidden;background:#0f1720;display:flex;align-items:center;justify-content:center}
-    .game .thumb img{width:100%;height:100%;object-fit:cover;display:block}
-    .game .meta{display:flex;justify-content:space-between;align-items:center}
-    .game .meta h4{margin:0;font-size:1rem}
-    .game .meta .play{padding:8px 12px;border-radius:10px;border:none;cursor:pointer;background:var(--accent);color:var(--bg-1);font-weight:800}
-
-    /* ---------- MODAL ---------- */
-    .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;z-index:999}
-    .modal{width:min(920px,95%);background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0.06));border-radius:12px;padding:14px;border:1px solid rgba(255,255,255,0.04);box-shadow:0 18px 50px rgba(0,0,0,0.7)}
-    .modal .modal-head{display:flex;justify-content:space-between;align-items:center;gap:10px}
-    .modal iframe{width:100%;height:520px;border-radius:8px;border:0;background:#000}
-
-    /* ---------- SETTINGS SIDE PANEL ---------- */
-    .settings-panel{position:fixed;right:-420px;top:0;height:100vh;width:380px;background:linear-gradient(180deg,var(--bg-2),var(--bg-3));box-shadow: -20px 0 60px rgba(0,0,0,0.5);padding:18px;border-left:1px solid rgba(255,255,255,0.03);transition: right 300ms ease;z-index:990}
-    .settings-panel.open{right:0}
-    .settings-panel h4{margin:0 0 12px}
-
-    /* ---------- FOOTER ---------- */
-    footer{max-width:1100px;margin:18px auto;padding:18px;border-radius:12px;background:transparent;color:var(--text);display:flex;justify-content:space-between;gap:12px;align-items:center}
-    footer small{opacity:0.85}
-
-    /* ---------- RAIN (optimized) ---------- */
-    .rain-wrapper{pointer-events:none;position:fixed;inset:0;z-index:1;overflow:hidden}
-    .raindrop{position:absolute;top:-10px;width:2px;height:18px;background:linear-gradient(180deg,var(--accent),var(--accent-2));opacity:0.6;border-radius:2px;transform:translateY(-10vh);animation:fall linear infinite}
-    @keyframes fall{to{transform:translateY(120vh);opacity:0}}
-    /* small screens */
-    @media (max-width:900px){
-      .hero{grid-template-columns:1fr; padding:16px}
-      header{padding:12px}
-      .hero-right{order:2}
+    /* Offline popup */
+    #offlinePopup {
+      display: none;
     }
   </style>
 </head>
-<body>
-  <!-- ========== PRELOADER ========== -->
-  <div id="preloader" role="status" aria-live="polite">
-    <div class="loader" aria-hidden="true">
-      <div class="spinner" aria-hidden="true"></div>
-      <p>MR GAMES — Loading assets…</p>
-    </div>
+
+<body class="text-white">
+
+  <!-- LOADING SCREEN -->
+  <div id="loadingScreen">
+    <div class="loader"></div>
+    <p class="text-xl tracking-wide text-blue-300">Loading MR Games… 🎮</p>
   </div>
 
-  <!-- ========== HEADER ========== -->
-  <header>
-    <div class="brand" aria-label="MR Games brand">
-      <div class="logo" aria-hidden="true">
-        <!-- small SVG icon -->
-        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-          <rect x="2" y="2" width="20" height="20" rx="4" fill="white" fill-opacity="0.12"/>
-          <path d="M6 16V8L12 11L18 8V16" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
-      <div>
-        <h1>MR GAMES</h1>
-        <p>Unblocked browser games • MR02</p>
-      </div>
-    </div>
+  <!-- OFFLINE POPUP -->
+  <div id="offlinePopup" class="fixed bottom-5 left-1/2 -translate-x-1/2 bg-red-700 p-4 rounded-xl shadow-xl w-80 text-center z-50">
+    <p class="font-semibold">⚠️ Internet disconnected</p>
+    <p class="text-sm">Some games may not load.</p>
+  </div>
 
-    <nav class="top-links" aria-label="Top quick links">
-      <!-- Keep your settings link as requested -->
-      <a class="btn-ghost" href="settings.html" title="Open settings">⚙️ Settings</a>
-
-      <!-- Dark/light toggle (JS will persist) -->
-      <button id="theme-toggle" class="btn-ghost" aria-pressed="false" title="Toggle dark or light theme">🌓 Theme</button>
-
-      <!-- Chat quick open -->
-      <button id="open-chat" class="btn-ghost" title="Open chat">💬 Chat</button>
-    </nav>
+  <!-- HEADER -->
+  <header class="p-6 text-center bg-blue-900/20 backdrop-blur-md border-b border-blue-800/30">
+    <h1 class="text-4xl font-extrabold text-blue-300 drop-shadow-lg">MR GAMES 🎮</h1>
+    <p class="text-blue-400 mt-1">Play anything. Anywhere. Anytime.</p>
   </header>
 
-  <!-- ========== HERO ========== -->
-  <main>
-    <section class="hero" role="region" aria-labelledby="hero-title">
-      <div class="hero-left">
-        <h2 id="hero-title">Play now — quick to load, built for school & home</h2>
-        <p>MR GAMES brings classic and modern casual games in one place. Fast loading, keyboard-friendly, and mobile-ready.</p>
-        <div class="cta-row">
-          <a href="Games.html" class="btn btn-primary" title="Play games now">▶️ Play Now</a>
-          <a href="leaderboard.html" class="btn btn-ghost" title="See the leaderboard">🏆 Leaderboard</a>
+  <!-- NAVIGATION -->
+  <nav class="flex justify-center gap-4 mt-6 flex-wrap">
+    <button onclick="cloakGoogle()" class="px-4 py-2 bg-blue-700 rounded-lg hover:bg-blue-800">Cloak: Google</button>
+    <button onclick="cloakDrive()" class="px-4 py-2 bg-blue-700 rounded-lg hover:bg-blue-800">Cloak: Drive</button>
+    <button onclick="cloakGmail()" class="px-4 py-2 bg-blue-700 rounded-lg hover:bg-blue-800">Cloak: Gmail</button>
+    <button onclick="cloakMaths()" class="px-4 py-2 bg-blue-700 rounded-lg hover:bg-blue-800">Cloak: Maths</button>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="p-6">
+
+    <!-- SECTION: Games -->
+    <section class="mt-10">
+      <h2 class="text-3xl mb-4 font-bold text-blue-300">🎯 Popular Games</h2>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Game Card Template -->
+        <div class="gameCard bg-blue-900/20 p-4 rounded-2xl border border-blue-800/30">
+          <img src="https://picsum.photos/400/250?random=1" class="rounded-xl mb-3">
+          <h3 class="text-xl font-bold">Drift Boss</h3>
+          <p class="text-sm text-blue-300">A drifting skill game where timing is everything.</p>
+          <a href="#" class="mt-3 inline-block px-3 py-2 bg-blue-700 rounded-lg hover:bg-blue-800">Play ➜</a>
         </div>
 
-        <!-- NAV GRID (keeps your links intact) -->
-        <div class="nav-grid" style="margin-top:18px">
-          <a class="nav-card" href="Games.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h18v10H3z" fill="currentColor"/></svg>Play</a>
-          <a class="nav-card" href="leaderboard.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 7h7l-5.5 4.3L20 22l-8-5-8 5 1.5-8.7L0 9h7L12 2z" fill="currentColor"/></svg>Leaderboard</a>
-          <a class="nav-card" href="about_us.html"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="2" /><path d="M6 20v-1c0-2 4-3 6-3s6 1 6 3v1H6z" /></svg>About</a>
-          <a class="nav-card" href="record.html"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>Records</a>
-          <a class="nav-card" href="use_full_links.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a3 3 0 010-6h4" /></svg>Useful Links</a>
-          <a class="nav-card" href="https://sigmasigmatoiletedge.github.io/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12h20" /></svg>Nettle Web</a>
-          <a class="nav-card" href="Clash.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2l12 10-6 10-6-10z" /></svg>Clash Picker</a>
-          <a class="nav-card" href="https://ihackforfree02.github.io/mrgames-/"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>MR GAMES+ BETA</a>
-          <a class="nav-card" href="https://ihackforfree02.github.io/games/"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/></svg>MR GAMES GBA</a>
-          <a class="nav-card" href="https://ihackforfree02.github.io/hollownight-sigma/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6h6v8h-6l-3 6-3-6H3V8h6z"/></svg>Hollow Knight Map</a>
-          <a class="nav-card" href="https://q6t1u8.ddx.edpuzzle.icu.cdn.cloudflare.net/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h18" /></svg>Working Proxy</a>
-          <a class="nav-card" href="https://luminal.cfd.cdn.cloudflare.net/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v20" /></svg>Luminal</a>
+        <div class="gameCard bg-blue-900/20 p-4 rounded-2xl border border-blue-800/30">
+          <img src="https://picsum.photos/400/250?random=2" class="rounded-xl mb-3">
+          <h3 class="text-xl font-bold">Run 3</h3>
+          <p class="text-sm text-blue-300">Explore tunnels in space at high speed.</p>
+          <a href="#" class="mt-3 inline-block px-3 py-2 bg-blue-700 rounded-lg hover:bg-blue-800">Play ➜</a>
         </div>
-      </div>
 
-      <div class="hero-right" aria-hidden="false">
-        <!-- small carousel / screenshots -->
-        <div style="width:100%;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.04);background:var(--card-bg);">
-          <div id="carousel" style="position:relative;">
-            <div class="slides" style="display:flex;transition:transform 400ms ease">
-              <!-- placeholders use inline SVG data URIs so they always show -->
-              <div style="min-width:420px;height:220px;flex-shrink:0">
-                <img loading="lazy" src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="420" height="220"><rect width="100%" height="100%" fill="%230c1220"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="22" fill="%23ffffff" font-family="Arial">Game Screen 1</text></svg>' alt="screenshot 1" style="width:100%;height:100%;display:block;object-fit:cover;">
-              </div>
-              <div style="min-width:420px;height:220px;flex-shrink:0">
-                <img loading="lazy" src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="420" height="220"><rect width="100%" height="100%" fill="%2322362e"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="22" fill="%23ffffff" font-family="Arial">Game Screen 2</text></svg>' alt="screenshot 2" style="width:100%;height:100%;display:block;object-fit:cover;">
-              </div>
-              <div style="min-width:420px;height:220px;flex-shrink:0">
-                <img loading="lazy" src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="420" height="220"><rect width="100%" height="100%" fill="%23334444"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="22" fill="%23ffffff" font-family="Arial">Game Screen 3</text></svg>' alt="screenshot 3" style="width:100%;height:100%;display:block;object-fit:cover;">
-              </div>
-            </div>
-
-            <button id="prev" aria-label="Previous screenshot" style="position:absolute;left:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.4);color:white;border:none;padding:8px;border-radius:8px;cursor:pointer">◀</button>
-            <button id="next" aria-label="Next screenshot" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.4);color:white;border:none;padding:8px;border-radius:8px;cursor:pointer">▶</button>
-          </div>
-
-          <div style="display:flex;gap:8px;align-items:center;justify-content:center;padding:10px">
-            <button id="open-gallery" class="btn btn-primary" style="padding:10px 14px">Browse Games</button>
-            <a class="btn btn-ghost" href="Games.html">All Games</a>
-          </div>
+        <div class="gameCard bg-blue-900/20 p-4 rounded-2xl border border-blue-800/30">
+          <img src="https://picsum.photos/400/250?random=3" class="rounded-xl mb-3">
+          <h3 class="text-xl font-bold">Slope</h3>
+          <p class="text-sm text-blue-300">Roll down a neon slope without falling.</p>
+          <a href="#" class="mt-3 inline-block px-3 py-2 bg-blue-700 rounded-lg hover:bg-blue-800">Play ➜</a>
         </div>
-      </div>
-    </section>
-
-    <!-- ========== GAMES SECTION ========== -->
-    <section class="section" aria-labelledby="games-title">
-      <h3 id="games-title">Featured games</h3>
-      <div class="cards" id="game-cards">
-        <!-- game 1 -->
-        <article class="game" data-game-src="Games.html#game1" tabindex="0" aria-label="Game: Example Runner">
-          <div class="thumb">
-            <img loading="lazy" alt="Example Runner thumbnail" src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="300"><rect width="100%" height="100%" fill="%230a1b24"/><text x="50%" y="50%" fill="%23fff" font-size="20" dominant-baseline="middle" text-anchor="middle">Example Runner</text></svg>'>
-          </div>
-          <div class="meta">
-            <h4>Example Runner</h4>
-            <div>
-              <button class="play" data-play-src="Games.html#game1">Play</button>
-            </div>
-          </div>
-          <p style="opacity:0.85;margin:6px 0 0;font-size:0.92rem">Fast-paced runner — use arrows to dodge obstacles. Quick to load and keyboard friendly.</p>
-        </article>
-
-        <!-- game 2 -->
-        <article class="game" data-game-src="Games.html#game2" tabindex="0" aria-label="Game: Puzzle Drop">
-          <div class="thumb">
-            <img loading="lazy" alt="Puzzle Drop thumbnail" src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="300"><rect width="100%" height="100%" fill="%231a2230"/><text x="50%" y="50%" fill="%23fff" font-size="20" dominant-baseline="middle" text-anchor="middle">Puzzle Drop</text></svg>'>
-          </div>
-          <div class="meta">
-            <h4>Puzzle Drop</h4>
-            <div>
-              <button class="play" data-play-src="Games.html#game2">Play</button>
-            </div>
-          </div>
-          <p style="opacity:0.85;margin:6px 0 0;font-size:0.92rem">Puzzle and strategy — simple controls, deep mechanics.</p>
-        </article>
-
-        <!-- game 3 -->
-        <article class="game" data-game-src="Games.html#game3" tabindex="0" aria-label="Game: Retro Shooter">
-          <div class="thumb">
-            <img loading="lazy" alt="Retro Shooter thumbnail" src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="300"><rect width="100%" height="100%" fill="%2312161f"/><text x="50%" y="50%" fill="%23fff" font-size="20" dominant-baseline="middle" text-anchor="middle">Retro Shooter</text></svg>'>
-          </div>
-          <div class="meta">
-            <h4>Retro Shooter</h4>
-            <div>
-              <button class="play" data-play-src="Games.html#game3">Play</button>
-            </div>
-          </div>
-          <p style="opacity:0.85;margin:6px 0 0;font-size:0.92rem">Classic arcade action with leaderboards and combos.</p>
-        </article>
 
       </div>
     </section>
 
-    <!-- ========== FOOTER ========== -->
-    <footer>
-      <small>© MR GAMES — MR02 • Unblocked games. Links kept the same and cloak file intact.</small>
-      <div style="display:flex;gap:8px">
-        <a class="partner-badge" href="https://ezunblocktheopps.github.io/" target="_blank" style="text-decoration:none;padding:8px 12px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:var(--bg-1);font-weight:700">🤝 Partnered with Sigmi</a>
+    <!-- SECTION: Tools -->
+    <section class="mt-16">
+      <h2 class="text-3xl mb-4 font-bold text-blue-300">🧰 Tools & Extras</h2>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+
+        <div class="bg-blue-900/20 p-4 rounded-2xl border border-blue-800/30">
+          <h3 class="text-xl font-bold mb-2">Proxy Access 🌐</h3>
+          <p class="text-blue-300 text-sm mb-3">Use this if games are blocked.</p>
+          <a href="#" class="px-4 py-2 bg-blue-700 rounded-lg hover:bg-blue-800">Open Proxy ➜</a>
+        </div>
+
+        <div class="bg-blue-900/20 p-4 rounded-2xl border border-blue-800/30">
+          <h3 class="text-xl font-bold mb-2">Updates 🔧</h3>
+          <p class="text-blue-300 text-sm mb-3">Check what’s new or broken.</p>
+          <a href="#" class="px-4 py-2 bg-blue-700 rounded-lg hover:bg-blue-800">View Updates ➜</a>
+        </div>
+
       </div>
-    </footer>
+    </section>
+
   </main>
 
-  <!-- ========== SETTINGS PANEL (slides in) ========== -->
-  <aside class="settings-panel" id="settingsPanel" aria-hidden="true">
-    <h4>Settings</h4>
-    <p style="opacity:0.9">Personalize MR GAMES experience</p>
-    <div style="margin-top:12px;display:flex;flex-direction:column;gap:12px">
-      <label>
-        <input type="checkbox" id="pref-rain" /> Enable rain effect
-      </label>
-      <label>
-        <input type="checkbox" id="pref-preload" checked /> Use quick preloader
-      </label>
-      <label>
-        <input type="checkbox" id="pref-sounds" /> Enable UI sounds (if available)
-      </label>
-      <div style="display:flex;gap:8px">
-        <button id="closeSettings" class="btn btn-ghost">Close</button>
-        <button id="saveSettings" class="btn btn-primary">Save</button>
-      </div>
-    </div>
-    <hr style="margin:18px 0;border:none;border-top:1px solid rgba(255,255,255,0.03)">
-    <small style="opacity:0.8">Advanced: Your `cloak_panic.js` file will remain linked exactly as before and unchanged by these UI updates.</small>
-  </aside>
-
-  <!-- ========== MODAL (for playing games inline) ========== -->
-  <div class="modal-backdrop" id="modal" role="dialog" aria-modal="true" aria-hidden="true">
-    <div class="modal" role="document">
-      <div class="modal-head" style="margin-bottom:10px;">
-        <strong id="modal-title">Play</strong>
-        <div style="display:flex;gap:8px">
-          <a id="open-in-new" class="btn btn-ghost" href="#" target="_blank">Open in new tab</a>
-          <button id="close-modal" class="btn btn-ghost">Close</button>
-        </div>
-      </div>
-      <!-- iframe area -->
-      <div style="height:520px">
-        <iframe id="gameFrame" src="" title="Game frame" sandbox="allow-scripts allow-same-origin allow-forms"></iframe>
-      </div>
-    </div>
-  </div>
-
-  <!-- Rain wrapper -->
-  <div class="rain-wrapper" id="rainWrapper" aria-hidden="true"></div>
-
-  <!-- Keep cloak file as requested -->
-  <script src="cloak_panic.js"></script>
+  <!-- FOOTER -->
+  <footer class="text-center mt-20 p-6 text-blue-400">
+    <p>MR Games © 2025 — Stay playing 😎</p>
+  </footer>
 
   <script>
-    /* ---------- Page bootstrapping ---------- */
-    (function(){
-      // theme persistence
-      const root = document.documentElement;
-      const themeToggle = document.getElementById('theme-toggle');
-      const saved = localStorage.getItem('mrgames_theme');
-      if (saved === 'light') root.setAttribute('data-theme','light');
-
-      function updateTheme(){
-        const isLight = root.getAttribute('data-theme') === 'light';
-        themeToggle.setAttribute('aria-pressed', String(isLight));
-        themeToggle.textContent = isLight ? '☀️ Light' : '🌓 Dark';
+    // Offline detection
+    function updateStatus() {
+      const popup = document.getElementById("offlinePopup");
+      if (!navigator.onLine) {
+        popup.style.display = "block";
+      } else {
+        popup.style.display = "none";
       }
-      updateTheme();
+    }
+    window.addEventListener("online", updateStatus);
+    window.addEventListener("offline", updateStatus);
 
-      themeToggle.addEventListener('click', ()=>{
-        const isLight = root.getAttribute('data-theme') === 'light';
-        root.setAttribute('data-theme', isLight ? '' : 'light');
-        localStorage.setItem('mrgames_theme', isLight ? 'dark' : 'light');
-        updateTheme();
-      });
+    // Cloaking
+    function cloakGoogle() { document.title = "Google"; }
+    function cloakDrive() { document.title = "Google Drive"; }
+    function cloakGmail() { document.title = "Gmail"; }
+    function cloakMaths() { document.title = "Maths Revision"; }
 
-      // preloader hide
-      window.addEventListener('load', ()=> {
-        // respect user preference to quickly hide preloader
-        const pre = document.getElementById('preloader');
-        setTimeout(()=> pre.style.display='none', 500);
-      });
-
-      // Chat button uses the same link as before
-      document.getElementById('open-chat').addEventListener('click', ()=> {
-        if (window.chatWindow && !window.chatWindow.closed) {
-          window.chatWindow.focus();
-        } else {
-          window.chatWindow = window.open('https://communityhelp.linewize.org/','ChatWindow','width=420,height=640');
-          if (!window.chatWindow) alert('Popup blocked: allow popups for chat');
-        }
-      });
-
-      // gallery carousel
-      const carousel = document.querySelector('#carousel .slides');
-      const total = carousel.children.length;
-      let idx = 0;
-      document.getElementById('next').addEventListener('click', ()=> { idx = (idx+1)%total; carousel.style.transform = 'translateX(' + (-idx*420) + 'px)'; });
-      document.getElementById('prev').addEventListener('click', ()=> { idx = (idx-1+total)%total; carousel.style.transform = 'translateX(' + (-idx*420) + 'px)'; });
-
-      // open gallery button
-      document.getElementById('open-gallery').addEventListener('click', ()=> location.href='Games.html');
-
-      // play buttons open modal with iframe to the same page anchors (keeps links the same)
-      const modal = document.getElementById('modal');
-      const gameFrame = document.getElementById('gameFrame');
-      const modalTitle = document.getElementById('modal-title');
-      const openInNew = document.getElementById('open-in-new');
-
-      function openModal(src, title){
-        modal.setAttribute('aria-hidden','false'); modal.style.display='flex';
-        gameFrame.src = src;
-        modalTitle.textContent = 'Playing — ' + (title||'Game');
-        openInNew.href = src;
-      }
-      function closeModal(){
-        modal.setAttribute('aria-hidden','true'); modal.style.display='none';
-        gameFrame.src = '';
-      }
-      document.querySelectorAll('.play').forEach(btn=>{
-        btn.addEventListener('click', e=>{
-          const src = btn.getAttribute('data-play-src') || btn.closest('.game')?.dataset.gameSrc || 'Games.html';
-          openModal(src, btn.closest('.game')?.querySelector('h4')?.textContent || 'Game');
-        });
-      });
-      document.getElementById('close-modal').addEventListener('click', closeModal);
-      modal.addEventListener('click', (e)=> { if (e.target === modal) closeModal(); });
-
-      // keyboard accessibility
-      document.addEventListener('keydown', (e)=> {
-        if (e.key === 'Escape') {
-          // close modal & settings
-          if (modal.style.display === 'flex') closeModal();
-          document.getElementById('settingsPanel').classList.remove('open');
-        }
-      });
-
-      // settings panel open/close
-      const settingsPanel = document.getElementById('settingsPanel');
-      document.querySelector('a[href="settings.html"]').addEventListener('click', (ev)=>{
-        // if user clicks settings in header, open panel instead of leaving
-        ev.preventDefault();
-        settingsPanel.classList.add('open'); settingsPanel.setAttribute('aria-hidden','false');
-      });
-      document.getElementById('closeSettings').addEventListener('click', ()=> settingsPanel.classList.remove('open'));
-      document.getElementById('saveSettings').addEventListener('click', ()=>{
-        settingsPanel.classList.remove('open');
-        alert('Settings saved (local only)');
-      });
-
-      /* ---------- Rain (optimized, low DOM) ---------- */
-      const rainWrapper = document.getElementById('rainWrapper');
-      const rainPref = localStorage.getItem('mrgames_rain') !== 'false'; // default true
-      if (rainPref) startRain();
-
-      function startRain(){
-        // create a small number of drops reused with animation delay
-        const drops = 28;
-        for (let i=0;i<drops;i++){
-          const d = document.createElement('div');
-          d.className='raindrop';
-          const left = Math.random()*100;
-          const scale = 0.8 + Math.random()*1.6;
-          d.style.left = left + 'vw';
-          d.style.width = Math.max(1, Math.round(scale)) + 'px';
-          d.style.height = (12 + scale*10) + 'px';
-          d.style.animationDuration = (2.2 + Math.random()*2.8) + 's';
-          d.style.animationDelay = (Math.random()*4) + 's';
-          rainWrapper.appendChild(d);
-        }
-      }
-
-      /* ---------- Preloader preferences ---------- */
-      const prefPreload = document.getElementById('pref-preload');
-      prefPreload.checked = localStorage.getItem('mrgames_preload') !== 'false';
-      prefPreload.addEventListener('change', ()=> localStorage.setItem('mrgames_preload', prefPreload.checked));
-
-      // rain preference checkbox
-      const prefRain = document.getElementById('pref-rain');
-      prefRain.checked = rainPref;
-      prefRain.addEventListener('change', ()=>{
-        localStorage.setItem('mrgames_rain', prefRain.checked);
-        if (prefRain.checked) startRain();
-        else rainWrapper.innerHTML = '';
-      });
-
-      // persist theme setting immediately
-      const themeNow = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
-      localStorage.setItem('mrgames_theme', themeNow);
-
-      // Remove preloader if still visible after 6s just in case
-      setTimeout(()=>{ const pre = document.getElementById('preloader'); if (pre) pre.style.display='none'; }, 6000);
-
-      // Keep "Open in new" with the same link as the game page to preserve cloaking behavior
-      openInNew.addEventListener('click', ()=> {}); // no-op to keep anchor intact
-
-      // quick focus style for keyboard users
-      document.addEventListener('keydown', e => { if (e.key === 'Tab') document.body.classList.add('show-focus'); });
-    })();
+    feather.replace();
   </script>
+
 </body>
 </html>
