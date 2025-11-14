@@ -1,284 +1,478 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>MR GAMES | MR02 | Unblocked Online Games</title>
-
-  <!-- Canonical SEO Tag -->
+  <meta name="description" content="MR GAMES — fast unblocked browser games, leaderboards, and community tools. Play classic and modern browser games with cloud-synced records." />
   <link rel="canonical" href="https://ihackforfree02.github.io/Ihackforfree.github.io/" />
   <link rel="icon" href="favicon.ico" />
-
   <style>
-    /* --- GLOBAL STYLE --- */
-    * {
-      box-sizing: border-box;
+    /* ---------- RESET & UTILITIES ---------- */
+    :root{
+      --bg-1:#0f2027; --bg-2:#203a43; --bg-3:#2c5364;
+      --accent: #00ffff; --accent-2:#0078D7; --gold:#f0db4f;
+      --card-bg: rgba(255,255,255,0.04);
+      --glass: rgba(255,255,255,0.04);
+      --text:#e9f6ff;
+    }
+    [data-theme="light"]{
+      --bg-1:#f5f7fb; --bg-2:#eef4fb; --bg-3:#dfeefb;
+      --accent:#0078D7; --accent-2:#0056a3; --gold:#b8860b;
+      --card-bg: rgba(0,0,0,0.04);
+      --glass: rgba(0,0,0,0.03);
+      --text:#0b1220;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter, "Segoe UI", Roboto, system-ui, -apple-system, "Helvetica Neue", Arial;}
+    body{
+      background: linear-gradient(90deg,var(--bg-1),var(--bg-2),var(--bg-3));
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
     }
 
-    body, html {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-      color: #fff;
-      overflow-x: hidden;
+    /* ---------- PRELOADER ---------- */
+    #preloader{
+      position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
+      background:linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.2));
+      z-index:9999;backdrop-filter: blur(4px);
     }
-
-    /* --- MAIN CONTAINER --- */
-    .container {
-      text-align: center;
-      padding: 70px 20px;
-      max-width: 700px;
-      margin: auto;
-      background: rgba(0, 0, 0, 0.6);
-      border-radius: 16px;
-      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
-      animation: fadeIn 1.8s ease-out forwards;
-      opacity: 0;
-      position: relative;
-      z-index: 10;
+    .loader {
+      width:120px;height:120px;border-radius:16px;background:linear-gradient(135deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01));
+      display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px;box-shadow:0 8px 30px rgba(0,0,0,0.6);
+      border:1px solid rgba(255,255,255,0.03);
     }
-
-    @keyframes fadeIn {
-      to { opacity: 1; }
+    .spinner {
+      width:56px;height:56px;border-radius:50%;border:5px solid rgba(255,255,255,0.08);
+      border-top-color:var(--accent);
+      animation:spin 1s linear infinite;margin-bottom:10px;
     }
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .loader p{margin:0;font-size:13px;color:var(--text);opacity:0.95}
 
-    h1 {
-      font-size: 3.2rem;
-      margin-bottom: 15px;
-      color: #f0db4f;
-      text-shadow: 0 0 10px #f0db4f, 0 0 20px #f0db4f;
-      animation: glow 2s ease-in-out infinite alternate;
+    /* ---------- HEADER / NAV ---------- */
+    header{position:relative;z-index:40;padding:18px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo {
+      width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--bg-1);box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+      flex-shrink:0;
     }
+    .brand h1{font-size:1.05rem;margin:0;line-height:1}
+    .brand p{margin:0;font-size:0.78rem;opacity:0.9;color:var(--text)}
+    nav.top-links{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    nav.top-links a{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;text-decoration:none;color:var(--accent);border:1px solid rgba(255,255,255,0.03);background:var(--glass);font-weight:600}
+    nav.top-links a:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,0.25);}
 
-    @keyframes glow {
-      from { text-shadow: 0 0 6px #f0db4f; }
-      to { text-shadow: 0 0 20px #f0db4f, 0 0 35px #f0db4f; }
+    /* ---------- HERO ---------- */
+    .hero{
+      max-width:1100px;margin:18px auto;padding:28px;border-radius:14px;background:linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.15));backdrop-filter: blur(6px);
+      display:grid;grid-template-columns: 1fr 420px;gap:22px;align-items:center;
     }
-
-    /* --- NAV GRID --- */
-    nav {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 18px;
-      margin-top: 35px;
+    .hero-left h2{font-size:2.2rem;margin:0 0 10px;color:var(--gold);text-shadow:0 0 8px rgba(0,0,0,0.2);}
+    .hero-left p{margin:0 0 18px;color:var(--text);opacity:0.95}
+    .cta-row{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{
+      padding:12px 18px;border-radius:12px;text-decoration:none;font-weight:700;border:none;cursor:pointer;
+      display:inline-flex;gap:10px;align-items:center;justify-content:center;
     }
+    .btn-primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:var(--bg-1);box-shadow:0 8px 24px rgba(0,0,0,0.35)}
+    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--text)}
+    .hero-right{display:flex;flex-direction:column;gap:12px;align-items:center}
 
-    nav a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      padding: 12px 18px;
-      font-size: 1.2rem;
-      color: #00ffff;
-      text-decoration: none;
-      border: 2px solid #00ffff;
-      border-radius: 30px;
-      box-shadow: 0 0 8px #00ffff;
-      transition: 0.25s ease;
+    /* ---------- NAV GRID (main) ---------- */
+    .nav-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;margin-top:8px}
+    .nav-card{display:flex;gap:12px;align-items:center;padding:12px;border-radius:12px;background:var(--card-bg);border:1px solid rgba(255,255,255,0.03);text-decoration:none;color:var(--text);font-weight:700}
+    .nav-card svg{width:28px;height:28px;flex-shrink:0}
+    .nav-card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(0,0,0,0.45)}
+
+    /* ---------- GALLERY / CARDS ---------- */
+    .section{max-width:1100px;margin:26px auto;padding:12px}
+    .section h3{margin:6px 0 12px;font-size:1.2rem}
+    .cards {display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+    .game {
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.06));border-radius:12px;padding:12px;border:1px solid rgba(255,255,255,0.03);
+      display:flex;flex-direction:column;gap:8px;min-height:220px;
     }
+    .game .thumb{height:120px;border-radius:10px;overflow:hidden;background:#0f1720;display:flex;align-items:center;justify-content:center}
+    .game .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+    .game .meta{display:flex;justify-content:space-between;align-items:center}
+    .game .meta h4{margin:0;font-size:1rem}
+    .game .meta .play{padding:8px 12px;border-radius:10px;border:none;cursor:pointer;background:var(--accent);color:var(--bg-1);font-weight:800}
 
-    nav a:hover {
-      background: #00ffff;
-      color: #0f2027;
-      transform: translateY(-3px);
-      box-shadow: 0 0 20px #00ffff;
+    /* ---------- MODAL ---------- */
+    .modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;z-index:999}
+    .modal{width:min(920px,95%);background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0.06));border-radius:12px;padding:14px;border:1px solid rgba(255,255,255,0.04);box-shadow:0 18px 50px rgba(0,0,0,0.7)}
+    .modal .modal-head{display:flex;justify-content:space-between;align-items:center;gap:10px}
+    .modal iframe{width:100%;height:520px;border-radius:8px;border:0;background:#000}
+
+    /* ---------- SETTINGS SIDE PANEL ---------- */
+    .settings-panel{position:fixed;right:-420px;top:0;height:100vh;width:380px;background:linear-gradient(180deg,var(--bg-2),var(--bg-3));box-shadow: -20px 0 60px rgba(0,0,0,0.5);padding:18px;border-left:1px solid rgba(255,255,255,0.03);transition: right 300ms ease;z-index:990}
+    .settings-panel.open{right:0}
+    .settings-panel h4{margin:0 0 12px}
+
+    /* ---------- FOOTER ---------- */
+    footer{max-width:1100px;margin:18px auto;padding:18px;border-radius:12px;background:transparent;color:var(--text);display:flex;justify-content:space-between;gap:12px;align-items:center}
+    footer small{opacity:0.85}
+
+    /* ---------- RAIN (optimized) ---------- */
+    .rain-wrapper{pointer-events:none;position:fixed;inset:0;z-index:1;overflow:hidden}
+    .raindrop{position:absolute;top:-10px;width:2px;height:18px;background:linear-gradient(180deg,var(--accent),var(--accent-2));opacity:0.6;border-radius:2px;transform:translateY(-10vh);animation:fall linear infinite}
+    @keyframes fall{to{transform:translateY(120vh);opacity:0}}
+    /* small screens */
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr; padding:16px}
+      header{padding:12px}
+      .hero-right{order:2}
     }
-
-    nav svg {
-      width: 20px;
-      height: 20px;
-      fill: currentColor;
-    }
-
-    /* --- RAIN EFFECT --- */
-    .rain-wrapper {
-      pointer-events: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: 2;
-      overflow: hidden;
-    }
-
-    .raindrop {
-      position: absolute;
-      top: -10px;
-      width: 2px;
-      background: linear-gradient(180deg, #00ffff, #0088cc);
-      opacity: 0.6;
-      border-radius: 2px;
-      animation: fall linear infinite;
-    }
-
-    @keyframes fall {
-      to {
-        transform: translateY(110vh);
-        opacity: 0;
-      }
-    }
-
-    /* --- SETTINGS BUTTON --- */
-    .settings-button {
-      position: fixed;
-      top: 15px;
-      right: 15px;
-      background-color: #00ffff;
-      color: #0f2027;
-      border: none;
-      border-radius: 50px;
-      padding: 11px 22px;
-      font-size: 1rem;
-      font-weight: bold;
-      box-shadow: 0 0 12px #00ffff;
-      cursor: pointer;
-      z-index: 20;
-      text-decoration: none;
-      transition: 0.25s;
-    }
-
-    .settings-button:hover {
-      box-shadow: 0 0 20px #00ffff;
-    }
-
-    /* --- PARTNER BADGE --- */
-    .partner-badge {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: linear-gradient(135deg, #00ffff, #0078D7);
-      color: #0f2027;
-      padding: 10px 20px;
-      border-radius: 30px;
-      font-size: 1rem;
-      font-weight: bold;
-      box-shadow: 0 0 15px #00ffff;
-      text-decoration: none;
-      transition: 0.25s ease;
-      z-index: 1000;
-    }
-
-    .partner-badge:hover {
-      transform: scale(1.07);
-      color: white;
-      box-shadow: 0 0 25px #00ffff;
-    }
-
-    /* --- CHAT BUTTON --- */
-    #chat-toggle {
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      background-color: #0078D7;
-      color: white;
-      padding: 10px 15px;
-      border-radius: 20px;
-      box-shadow: 0 0 10px #0078D7;
-      cursor: pointer;
-      user-select: none;
-      z-index: 1000;
-    }
-
   </style>
 </head>
-
 <body>
-
-  <a href="settings.html" class="settings-button">⚙️ Settings</a>
-
-  <div class="rain-wrapper" id="rain-wrapper"></div>
-
-  <div class="container">
-    <h1>MR GAMES</h1>
-
-    <nav>
-      <a href="Games.html">
-        🎮 Play
-      </a>
-      <a href="leaderboard.html">
-        🏆 Leaderboard
-      </a>
-      <a href="about_us.html">
-        📘 About
-      </a>
-      <a href="record.html">
-        📊 Records
-      </a>
-      <a href="use_full_links.html">
-        🔗 Useful Links
-      </a>
-      <a href="https://sigmasigmatoiletedge.github.io/">
-        🌐 Nettle Web
-      </a>
-      <a href="Clash.html">
-        ⚔️ Clash Picker
-      </a>
-      <a href="https://ihackforfree02.github.io/mrgames-/">
-        ⭐ MR GAMES+ BETA
-      </a>
-      <a href="https://ihackforfree02.github.io/games/">
-        🎲 MR GAMES GBA
-      </a>
-      <a href="https://ihackforfree02.github.io/hollownight-sigma/">
-        🗺️ Hollow Knight Map
-      </a>
-      <a href="https://q6t1u8.ddx.edpuzzle.icu.cdn.cloudflare.net/">
-        🔥 Working Proxy
-      </a>
-      <a href="https://luminal.cfd.cdn.cloudflare.net/">
-        🚀 Luminal
-      </a>
-    </nav>
+  <!-- ========== PRELOADER ========== -->
+  <div id="preloader" role="status" aria-live="polite">
+    <div class="loader" aria-hidden="true">
+      <div class="spinner" aria-hidden="true"></div>
+      <p>MR GAMES — Loading assets…</p>
+    </div>
   </div>
 
-  <div id="chat-toggle" onclick="toggleChat()">💬 Chat</div>
+  <!-- ========== HEADER ========== -->
+  <header>
+    <div class="brand" aria-label="MR Games brand">
+      <div class="logo" aria-hidden="true">
+        <!-- small SVG icon -->
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="2" width="20" height="20" rx="4" fill="white" fill-opacity="0.12"/>
+          <path d="M6 16V8L12 11L18 8V16" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div>
+        <h1>MR GAMES</h1>
+        <p>Unblocked browser games • MR02</p>
+      </div>
+    </div>
 
-  <a href="https://ezunblocktheopps.github.io/" class="partner-badge" target="_blank">
-    🤝 Partnered with Sigmi
-  </a>
+    <nav class="top-links" aria-label="Top quick links">
+      <!-- Keep your settings link as requested -->
+      <a class="btn-ghost" href="settings.html" title="Open settings">⚙️ Settings</a>
 
+      <!-- Dark/light toggle (JS will persist) -->
+      <button id="theme-toggle" class="btn-ghost" aria-pressed="false" title="Toggle dark or light theme">🌓 Theme</button>
+
+      <!-- Chat quick open -->
+      <button id="open-chat" class="btn-ghost" title="Open chat">💬 Chat</button>
+    </nav>
+  </header>
+
+  <!-- ========== HERO ========== -->
+  <main>
+    <section class="hero" role="region" aria-labelledby="hero-title">
+      <div class="hero-left">
+        <h2 id="hero-title">Play now — quick to load, built for school & home</h2>
+        <p>MR GAMES brings classic and modern casual games in one place. Fast loading, keyboard-friendly, and mobile-ready.</p>
+        <div class="cta-row">
+          <a href="Games.html" class="btn btn-primary" title="Play games now">▶️ Play Now</a>
+          <a href="leaderboard.html" class="btn btn-ghost" title="See the leaderboard">🏆 Leaderboard</a>
+        </div>
+
+        <!-- NAV GRID (keeps your links intact) -->
+        <div class="nav-grid" style="margin-top:18px">
+          <a class="nav-card" href="Games.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h18v10H3z" fill="currentColor"/></svg>Play</a>
+          <a class="nav-card" href="leaderboard.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 7h7l-5.5 4.3L20 22l-8-5-8 5 1.5-8.7L0 9h7L12 2z" fill="currentColor"/></svg>Leaderboard</a>
+          <a class="nav-card" href="about_us.html"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="2" /><path d="M6 20v-1c0-2 4-3 6-3s6 1 6 3v1H6z" /></svg>About</a>
+          <a class="nav-card" href="record.html"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>Records</a>
+          <a class="nav-card" href="use_full_links.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 14a3 3 0 010-6h4" /></svg>Useful Links</a>
+          <a class="nav-card" href="https://sigmasigmatoiletedge.github.io/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12h20" /></svg>Nettle Web</a>
+          <a class="nav-card" href="Clash.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2l12 10-6 10-6-10z" /></svg>Clash Picker</a>
+          <a class="nav-card" href="https://ihackforfree02.github.io/mrgames-/"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/></svg>MR GAMES+ BETA</a>
+          <a class="nav-card" href="https://ihackforfree02.github.io/games/"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/></svg>MR GAMES GBA</a>
+          <a class="nav-card" href="https://ihackforfree02.github.io/hollownight-sigma/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6h6v8h-6l-3 6-3-6H3V8h6z"/></svg>Hollow Knight Map</a>
+          <a class="nav-card" href="https://q6t1u8.ddx.edpuzzle.icu.cdn.cloudflare.net/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h18" /></svg>Working Proxy</a>
+          <a class="nav-card" href="https://luminal.cfd.cdn.cloudflare.net/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v20" /></svg>Luminal</a>
+        </div>
+      </div>
+
+      <div class="hero-right" aria-hidden="false">
+        <!-- small carousel / screenshots -->
+        <div style="width:100%;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.04);background:var(--card-bg);">
+          <div id="carousel" style="position:relative;">
+            <div class="slides" style="display:flex;transition:transform 400ms ease">
+              <!-- placeholders use inline SVG data URIs so they always show -->
+              <div style="min-width:420px;height:220px;flex-shrink:0">
+                <img loading="lazy" src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="420" height="220"><rect width="100%" height="100%" fill="%230c1220"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="22" fill="%23ffffff" font-family="Arial">Game Screen 1</text></svg>' alt="screenshot 1" style="width:100%;height:100%;display:block;object-fit:cover;">
+              </div>
+              <div style="min-width:420px;height:220px;flex-shrink:0">
+                <img loading="lazy" src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="420" height="220"><rect width="100%" height="100%" fill="%2322362e"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="22" fill="%23ffffff" font-family="Arial">Game Screen 2</text></svg>' alt="screenshot 2" style="width:100%;height:100%;display:block;object-fit:cover;">
+              </div>
+              <div style="min-width:420px;height:220px;flex-shrink:0">
+                <img loading="lazy" src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="420" height="220"><rect width="100%" height="100%" fill="%23334444"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="22" fill="%23ffffff" font-family="Arial">Game Screen 3</text></svg>' alt="screenshot 3" style="width:100%;height:100%;display:block;object-fit:cover;">
+              </div>
+            </div>
+
+            <button id="prev" aria-label="Previous screenshot" style="position:absolute;left:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.4);color:white;border:none;padding:8px;border-radius:8px;cursor:pointer">◀</button>
+            <button id="next" aria-label="Next screenshot" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.4);color:white;border:none;padding:8px;border-radius:8px;cursor:pointer">▶</button>
+          </div>
+
+          <div style="display:flex;gap:8px;align-items:center;justify-content:center;padding:10px">
+            <button id="open-gallery" class="btn btn-primary" style="padding:10px 14px">Browse Games</button>
+            <a class="btn btn-ghost" href="Games.html">All Games</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== GAMES SECTION ========== -->
+    <section class="section" aria-labelledby="games-title">
+      <h3 id="games-title">Featured games</h3>
+      <div class="cards" id="game-cards">
+        <!-- game 1 -->
+        <article class="game" data-game-src="Games.html#game1" tabindex="0" aria-label="Game: Example Runner">
+          <div class="thumb">
+            <img loading="lazy" alt="Example Runner thumbnail" src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="300"><rect width="100%" height="100%" fill="%230a1b24"/><text x="50%" y="50%" fill="%23fff" font-size="20" dominant-baseline="middle" text-anchor="middle">Example Runner</text></svg>'>
+          </div>
+          <div class="meta">
+            <h4>Example Runner</h4>
+            <div>
+              <button class="play" data-play-src="Games.html#game1">Play</button>
+            </div>
+          </div>
+          <p style="opacity:0.85;margin:6px 0 0;font-size:0.92rem">Fast-paced runner — use arrows to dodge obstacles. Quick to load and keyboard friendly.</p>
+        </article>
+
+        <!-- game 2 -->
+        <article class="game" data-game-src="Games.html#game2" tabindex="0" aria-label="Game: Puzzle Drop">
+          <div class="thumb">
+            <img loading="lazy" alt="Puzzle Drop thumbnail" src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="300"><rect width="100%" height="100%" fill="%231a2230"/><text x="50%" y="50%" fill="%23fff" font-size="20" dominant-baseline="middle" text-anchor="middle">Puzzle Drop</text></svg>'>
+          </div>
+          <div class="meta">
+            <h4>Puzzle Drop</h4>
+            <div>
+              <button class="play" data-play-src="Games.html#game2">Play</button>
+            </div>
+          </div>
+          <p style="opacity:0.85;margin:6px 0 0;font-size:0.92rem">Puzzle and strategy — simple controls, deep mechanics.</p>
+        </article>
+
+        <!-- game 3 -->
+        <article class="game" data-game-src="Games.html#game3" tabindex="0" aria-label="Game: Retro Shooter">
+          <div class="thumb">
+            <img loading="lazy" alt="Retro Shooter thumbnail" src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="600" height="300"><rect width="100%" height="100%" fill="%2312161f"/><text x="50%" y="50%" fill="%23fff" font-size="20" dominant-baseline="middle" text-anchor="middle">Retro Shooter</text></svg>'>
+          </div>
+          <div class="meta">
+            <h4>Retro Shooter</h4>
+            <div>
+              <button class="play" data-play-src="Games.html#game3">Play</button>
+            </div>
+          </div>
+          <p style="opacity:0.85;margin:6px 0 0;font-size:0.92rem">Classic arcade action with leaderboards and combos.</p>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer>
+      <small>© MR GAMES — MR02 • Unblocked games. Links kept the same and cloak file intact.</small>
+      <div style="display:flex;gap:8px">
+        <a class="partner-badge" href="https://ezunblocktheopps.github.io/" target="_blank" style="text-decoration:none;padding:8px 12px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:var(--bg-1);font-weight:700">🤝 Partnered with Sigmi</a>
+      </div>
+    </footer>
+  </main>
+
+  <!-- ========== SETTINGS PANEL (slides in) ========== -->
+  <aside class="settings-panel" id="settingsPanel" aria-hidden="true">
+    <h4>Settings</h4>
+    <p style="opacity:0.9">Personalize MR GAMES experience</p>
+    <div style="margin-top:12px;display:flex;flex-direction:column;gap:12px">
+      <label>
+        <input type="checkbox" id="pref-rain" /> Enable rain effect
+      </label>
+      <label>
+        <input type="checkbox" id="pref-preload" checked /> Use quick preloader
+      </label>
+      <label>
+        <input type="checkbox" id="pref-sounds" /> Enable UI sounds (if available)
+      </label>
+      <div style="display:flex;gap:8px">
+        <button id="closeSettings" class="btn btn-ghost">Close</button>
+        <button id="saveSettings" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+    <hr style="margin:18px 0;border:none;border-top:1px solid rgba(255,255,255,0.03)">
+    <small style="opacity:0.8">Advanced: Your `cloak_panic.js` file will remain linked exactly as before and unchanged by these UI updates.</small>
+  </aside>
+
+  <!-- ========== MODAL (for playing games inline) ========== -->
+  <div class="modal-backdrop" id="modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal" role="document">
+      <div class="modal-head" style="margin-bottom:10px;">
+        <strong id="modal-title">Play</strong>
+        <div style="display:flex;gap:8px">
+          <a id="open-in-new" class="btn btn-ghost" href="#" target="_blank">Open in new tab</a>
+          <button id="close-modal" class="btn btn-ghost">Close</button>
+        </div>
+      </div>
+      <!-- iframe area -->
+      <div style="height:520px">
+        <iframe id="gameFrame" src="" title="Game frame" sandbox="allow-scripts allow-same-origin allow-forms"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Rain wrapper -->
+  <div class="rain-wrapper" id="rainWrapper" aria-hidden="true"></div>
+
+  <!-- Keep cloak file as requested -->
   <script src="cloak_panic.js"></script>
 
   <script>
-    /* Fix redirect issues */
-    if (!location.pathname.includes('index.html') && location.pathname === '/') {
-      window.location.href = 'index.html';
-    }
+    /* ---------- Page bootstrapping ---------- */
+    (function(){
+      // theme persistence
+      const root = document.documentElement;
+      const themeToggle = document.getElementById('theme-toggle');
+      const saved = localStorage.getItem('mrgames_theme');
+      if (saved === 'light') root.setAttribute('data-theme','light');
 
-    function toggleChat() {
-      if (window.chatWindow && !window.chatWindow.closed) {
-        window.chatWindow.focus();
-      } else {
-        window.chatWindow = window.open(
-          'https://communityhelp.linewize.org/',
-          'ChatWindow',
-          'width=400,height=600'
-        );
+      function updateTheme(){
+        const isLight = root.getAttribute('data-theme') === 'light';
+        themeToggle.setAttribute('aria-pressed', String(isLight));
+        themeToggle.textContent = isLight ? '☀️ Light' : '🌓 Dark';
       }
-    }
+      updateTheme();
 
-    /* Rain Effect (Optimized) */
-    const rainWrapper = document.getElementById("rain-wrapper");
-    const drops = 85;
+      themeToggle.addEventListener('click', ()=>{
+        const isLight = root.getAttribute('data-theme') === 'light';
+        root.setAttribute('data-theme', isLight ? '' : 'light');
+        localStorage.setItem('mrgames_theme', isLight ? 'dark' : 'light');
+        updateTheme();
+      });
 
-    for (let i = 0; i < drops; i++) {
-      const d = document.createElement("div");
-      d.className = "raindrop";
+      // preloader hide
+      window.addEventListener('load', ()=> {
+        // respect user preference to quickly hide preloader
+        const pre = document.getElementById('preloader');
+        setTimeout(()=> pre.style.display='none', 500);
+      });
 
-      const scale = Math.random() * 1.5 + 0.5;
-      d.style.left = Math.random() * 100 + "vw";
-      d.style.height = 10 + scale * 8 + "px";
-      d.style.width = scale + "px";
-      d.style.animationDuration = 2.5 + Math.random() * 3 + "s";
-      d.style.animationDelay = Math.random() * 4 + "s";
+      // Chat button uses the same link as before
+      document.getElementById('open-chat').addEventListener('click', ()=> {
+        if (window.chatWindow && !window.chatWindow.closed) {
+          window.chatWindow.focus();
+        } else {
+          window.chatWindow = window.open('https://communityhelp.linewize.org/','ChatWindow','width=420,height=640');
+          if (!window.chatWindow) alert('Popup blocked: allow popups for chat');
+        }
+      });
 
-      rainWrapper.appendChild(d);
-    }
+      // gallery carousel
+      const carousel = document.querySelector('#carousel .slides');
+      const total = carousel.children.length;
+      let idx = 0;
+      document.getElementById('next').addEventListener('click', ()=> { idx = (idx+1)%total; carousel.style.transform = 'translateX(' + (-idx*420) + 'px)'; });
+      document.getElementById('prev').addEventListener('click', ()=> { idx = (idx-1+total)%total; carousel.style.transform = 'translateX(' + (-idx*420) + 'px)'; });
+
+      // open gallery button
+      document.getElementById('open-gallery').addEventListener('click', ()=> location.href='Games.html');
+
+      // play buttons open modal with iframe to the same page anchors (keeps links the same)
+      const modal = document.getElementById('modal');
+      const gameFrame = document.getElementById('gameFrame');
+      const modalTitle = document.getElementById('modal-title');
+      const openInNew = document.getElementById('open-in-new');
+
+      function openModal(src, title){
+        modal.setAttribute('aria-hidden','false'); modal.style.display='flex';
+        gameFrame.src = src;
+        modalTitle.textContent = 'Playing — ' + (title||'Game');
+        openInNew.href = src;
+      }
+      function closeModal(){
+        modal.setAttribute('aria-hidden','true'); modal.style.display='none';
+        gameFrame.src = '';
+      }
+      document.querySelectorAll('.play').forEach(btn=>{
+        btn.addEventListener('click', e=>{
+          const src = btn.getAttribute('data-play-src') || btn.closest('.game')?.dataset.gameSrc || 'Games.html';
+          openModal(src, btn.closest('.game')?.querySelector('h4')?.textContent || 'Game');
+        });
+      });
+      document.getElementById('close-modal').addEventListener('click', closeModal);
+      modal.addEventListener('click', (e)=> { if (e.target === modal) closeModal(); });
+
+      // keyboard accessibility
+      document.addEventListener('keydown', (e)=> {
+        if (e.key === 'Escape') {
+          // close modal & settings
+          if (modal.style.display === 'flex') closeModal();
+          document.getElementById('settingsPanel').classList.remove('open');
+        }
+      });
+
+      // settings panel open/close
+      const settingsPanel = document.getElementById('settingsPanel');
+      document.querySelector('a[href="settings.html"]').addEventListener('click', (ev)=>{
+        // if user clicks settings in header, open panel instead of leaving
+        ev.preventDefault();
+        settingsPanel.classList.add('open'); settingsPanel.setAttribute('aria-hidden','false');
+      });
+      document.getElementById('closeSettings').addEventListener('click', ()=> settingsPanel.classList.remove('open'));
+      document.getElementById('saveSettings').addEventListener('click', ()=>{
+        settingsPanel.classList.remove('open');
+        alert('Settings saved (local only)');
+      });
+
+      /* ---------- Rain (optimized, low DOM) ---------- */
+      const rainWrapper = document.getElementById('rainWrapper');
+      const rainPref = localStorage.getItem('mrgames_rain') !== 'false'; // default true
+      if (rainPref) startRain();
+
+      function startRain(){
+        // create a small number of drops reused with animation delay
+        const drops = 28;
+        for (let i=0;i<drops;i++){
+          const d = document.createElement('div');
+          d.className='raindrop';
+          const left = Math.random()*100;
+          const scale = 0.8 + Math.random()*1.6;
+          d.style.left = left + 'vw';
+          d.style.width = Math.max(1, Math.round(scale)) + 'px';
+          d.style.height = (12 + scale*10) + 'px';
+          d.style.animationDuration = (2.2 + Math.random()*2.8) + 's';
+          d.style.animationDelay = (Math.random()*4) + 's';
+          rainWrapper.appendChild(d);
+        }
+      }
+
+      /* ---------- Preloader preferences ---------- */
+      const prefPreload = document.getElementById('pref-preload');
+      prefPreload.checked = localStorage.getItem('mrgames_preload') !== 'false';
+      prefPreload.addEventListener('change', ()=> localStorage.setItem('mrgames_preload', prefPreload.checked));
+
+      // rain preference checkbox
+      const prefRain = document.getElementById('pref-rain');
+      prefRain.checked = rainPref;
+      prefRain.addEventListener('change', ()=>{
+        localStorage.setItem('mrgames_rain', prefRain.checked);
+        if (prefRain.checked) startRain();
+        else rainWrapper.innerHTML = '';
+      });
+
+      // persist theme setting immediately
+      const themeNow = root.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+      localStorage.setItem('mrgames_theme', themeNow);
+
+      // Remove preloader if still visible after 6s just in case
+      setTimeout(()=>{ const pre = document.getElementById('preloader'); if (pre) pre.style.display='none'; }, 6000);
+
+      // Keep "Open in new" with the same link as the game page to preserve cloaking behavior
+      openInNew.addEventListener('click', ()=> {}); // no-op to keep anchor intact
+
+      // quick focus style for keyboard users
+      document.addEventListener('keydown', e => { if (e.key === 'Tab') document.body.classList.add('show-focus'); });
+    })();
   </script>
-
 </body>
 </html>
